@@ -7,8 +7,6 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Profile,
-        meta: { requiresAuth: true },
     },
     {
         path: '/profile',
@@ -19,22 +17,15 @@ const routes = [
     { path: '/login', name: 'SignIn', component: SignIn },
 ]
 
-const isAuthenticated = true
-
 const router = createRouter({
     routes,
     history: createWebHistory(),
 })
 
 router.beforeEach((to, from) => {
-    if (to.meta.requiresAuth && !isAuthenticated) {
-        return {
-            name: 'login',
-        }
-    }
     if (to.name === 'Home') {
         return {
-            name: 'login',
+            name: 'SignIn',
         }
     }
 })
