@@ -28,7 +28,9 @@ const store = createStore({
             const response: Awaited<Response> = await signIn(payload)
 
             if (response) {
-                const profile = await getUserProfile(response.token)
+                const profile: Awaited<Profile> = await getUserProfile(
+                    response.token
+                )
                 context.commit('setIsAuthenticated', true)
                 context.commit('setUser', profile)
             } else {
